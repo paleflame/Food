@@ -6,21 +6,27 @@ const tabheader = document.querySelector(".tabheader"),
 
 
 tabheader.addEventListener("click", (e)=>{
+
+
     if (e.target.classList.contains("tabheader__item")){
-        tabcontentOptions.forEach((item, index)=>{
-            item.classList.remove("tabcontent_visible");
-        });
+        hideTabContent();
         tabheaderItems.forEach((item, index)=>{
-            item.classList.remove("tabheader__item_active");
-            if (item === e.target){
-                activateTab(index);
-            }
+            if (tabheaderItems[index] === e.target) showTabContent(index);
         });
 
     }
 });
 
-function activateTab(index){
+function hideTabContent(){
+    tabcontentOptions.forEach((item)=>{
+        item.classList.remove("tabcontent_visible");
+    });
+    tabheaderItems.forEach((item)=>{
+        item.classList.remove("tabheader__item_active");
+    });
+}
+
+function showTabContent(index){
     tabheaderItems[index].classList.add("tabheader__item_active");
     tabcontentOptions[index].classList.add("tabcontent_visible");
 }
