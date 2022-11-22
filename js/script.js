@@ -18,6 +18,8 @@ tabheader.addEventListener("click", (e)=>{
     }
 });
 
+
+
 function hideTabContent(){
     tabcontentOptions.forEach((item)=>{
         item.classList.remove("tabcontent_visible");
@@ -37,32 +39,35 @@ function showTabContent(index){
 // timer
 
 const time = {
-    days: document.querySelector("#hours"),
-    hours: document.querySelector("#hours"),
-    minutes: document.querySelector("#minutes"),
-    seconds: document.querySelector("#seconds"),
-    timeSummary: 0,
-    calcTimeSummary(){
-        // calculates whole amount of
-        this.timeSummary = (+this.seconds.innerText * 1000) + (+this.minutes.innerText * 60 * 1000) + (+this.hours.innerText * 60 * 60 * 1000) + (+this.days.innerText * 60 * 60 * 1000 * 24);
+    elements: {
+        days: document.querySelector("#days"),
+        hours: document.querySelector("#hours"),
+        minutes: document.querySelector("#minutes"),
+        seconds: document.querySelector("#seconds"),
     },
-    setEndDay(futureDate){
 
-        this.timeSummary = (new Date()).prototype.getMilliseconds();
-
+    timeLeft: 0,
+    setTimeLeft(date){
+        this.timeLeft = new Date(date) - new Date().getTime();
     },
     setTime(){
-        this.days.textContent = String( Math.trunc(this.timeSummary /  ( 60 * 60 * 1000 * 24)));
-        this.hours.textContent = String( Math.trunc(this.timeSummary /  ( 60 * 60 * 1000)) % 24);
-        this.minutes.textContent =  Math.trunc(this.timeSummary /  (60 * 1000) % 60);
-        this.seconds.textContent = String( Math.trunc(this.timeSummary /  1000) % 60);
+        this.elements.days.textContent = String( Math.trunc(this.timeLeft /  ( 60 * 60 * 1000 * 24)));
+        this.elements.hours.textContent = String( Math.trunc(this.timeLeft /  ( 60 * 60 * 1000)) % 24);
+        this.elements.minutes.textContent =  String(Math.trunc(this.timeLeft /  (60 * 1000) % 60));
+        this.elements.seconds.textContent = String( Math.trunc(this.timeLeft /  1000) % 60);
+    },
+    changeTimeCaption(){
+
     },
     changeTime(value){
-        this.timeSummary += value;
+        this.timeLeft += value;
     }
-}
+};
 
-time.calcTimeSummary()
+
+time.setTimeLeft("2022-12-30");
+console.log(time.timeLeft / (1000 * 60 * 60 * 24));
+time.setTime();
 const timerInterval = setInterval(()=>{
     time.setTime();
     time.changeTime(-1000);
@@ -70,6 +75,7 @@ const timerInterval = setInterval(()=>{
         clearInterval(timerInterval);
     }
 }, 1000);
+//
 
 
 
