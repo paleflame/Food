@@ -64,7 +64,14 @@ const time = {
     },
     timeLeft: 0,
     setTimeLeft(date){
-        this.timeLeft = new Date(date) - new Date().getTime();
+        const timeLeft = new Date(date) - new Date().getTime();
+        if (timeLeft > 0){
+            this.timeLeft = timeLeft;
+        }
+        else {
+            this.timeLeft = 0;
+        }
+
     },
     updateTime(){
         this.elements.days.textContent = addZero(Math.trunc(this.timeLeft /  ( 60 * 60 * 1000 * 24)));
@@ -76,21 +83,22 @@ const time = {
 
     },
     changeTime(value){
-        this.timeLeft += value;
+        if (this.timeLeft > 0){
+            this.timeLeft += value;
+        }
+
         time.updateTime();
     }
 };
 
 
-time.setTimeLeft("2022-10-30");
-console.log(time.timeLeft / (1000 * 60 * 60 * 24));
+time.setTimeLeft("2022-12-30");
 time.updateTime();
-
 const timerInterval = setInterval(()=>{
-    time.changeTime(-1000);
     if (time.timeLeft <= 0){
         clearInterval(timerInterval);
     }
+    time.changeTime(-1000);
 }, 1000);
 
 // console.log(time.days.innerText, time.hours.innerText, time.minutes.innerText, time.seconds.innerText);
