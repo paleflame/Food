@@ -105,12 +105,13 @@ const timerInterval = setInterval(()=>{
 const modal = document.querySelector(".modal"),
     modalButtons = document.querySelectorAll("[data-modalBtn]");
 
-console.log(modalButtons);
 
 modalButtons.forEach(button=>{
     button.addEventListener("click", openModal)
 })
 modal.addEventListener("click", closeModal)
+
+// const openaModalTimeout = setTimeout(openModal, 50_00);
 
 function closeModal(e){
     if (e.target.classList.contains("modal") || e.target.classList.contains("modal__close") || e.code === "Escape"){
@@ -122,10 +123,18 @@ function closeModal(e){
 function openModal(e){
     modal.classList.add("modal_opened");
     document.body.style.overflow = "hidden";
-
+    clearTimeout(openaModalTimeout);
 }
 
 document.addEventListener("keydown", (e)=>{
         closeModal(e);
-
 });
+
+window.addEventListener("scroll", modalOnScroll);
+
+function modalOnScroll(){
+    if (document.documentElement.scrollHeight - document.documentElement.clientHeight ===  document.documentElement.scrollTop){
+        window.removeEventListener("scroll", modalOnScroll);
+        openModal();
+    }
+}
