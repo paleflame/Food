@@ -680,6 +680,9 @@ a {
     overflow: hidden;
     background-color: rgba(0, 0, 0, .5)
 }
+.modal_opened{
+    display: block;
+}
 
 .modal__dialog {
     max-width: 500px;

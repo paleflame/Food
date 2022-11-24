@@ -101,4 +101,23 @@ const timerInterval = setInterval(()=>{
     time.changeTime(-1000);
 }, 1000);
 
-// console.log(time.days.innerText, time.hours.innerText, time.minutes.innerText, time.seconds.innerText);
+// modal
+const modal = document.querySelector(".modal"),
+    modalButtons = document.querySelectorAll("[data-modalBtn]");
+
+console.log(modalButtons);
+
+modalButtons.forEach(button=>{
+    button.addEventListener("click", openModal)
+})
+modal.addEventListener("click", closeModal)
+
+function closeModal(e){
+    if (e.target.classList.contains("modal") || e.target.classList.contains("modal__close")){
+        modal.classList.remove("modal_opened")
+    }
+}
+
+function openModal(e){
+    modal.classList.add("modal_opened");
+}
