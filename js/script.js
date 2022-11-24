@@ -113,11 +113,19 @@ modalButtons.forEach(button=>{
 modal.addEventListener("click", closeModal)
 
 function closeModal(e){
-    if (e.target.classList.contains("modal") || e.target.classList.contains("modal__close")){
+    if (e.target.classList.contains("modal") || e.target.classList.contains("modal__close") || e.code === "Escape"){
         modal.classList.remove("modal_opened")
     }
-}
+    document.body.style.overflow = "scroll";
 
+}
 function openModal(e){
     modal.classList.add("modal_opened");
+    document.body.style.overflow = "hidden";
+
 }
+
+document.addEventListener("keydown", (e)=>{
+        closeModal(e);
+
+});
