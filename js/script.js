@@ -138,3 +138,68 @@ function modalOnScroll(){
         openModal();
     }
 }
+
+// формируем карточки с помощью классов
+
+class MenuItem {
+    constructor(imageSrc, altText, menuName, description, price, currency, parentSelector) {
+        this.imageSrc = imageSrc;
+        this.altText = altText;
+        this.menuName = menuName;
+        this.description = description;
+        this.price = price;
+        this.currency = currency;
+        this.parent = document.querySelector(parentSelector);
+
+    }
+    render(){
+        const element = document.createElement("div");
+        element.classList.add("menu__item");
+        element.innerHTML = `
+                    <img src="${this.imageSrc}" alt="${this.altText}">
+                    <h3 class="menu__item-subtitle">Меню "${this.menuName}"</h3>
+                    <div class="menu__item-descr">${this.description}</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>${this.price}</span> ${this.currency}/день</div>
+                    </div>`
+        this.parent.append(element);
+
+
+
+    }
+}
+new MenuItem("img/tabs/vegy.jpg", "vegetarian", "Фитнес", "Меню \"Фитнесс\" это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!", 229, "грн.", ".menu__field .container" ).render()
+new MenuItem("img/tabs/elite.jpg", "elite", "Премиум", "В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!", 550, "грн.", ".menu__field .container" ).render();
+new MenuItem("img/tabs/post.jpg", "Post", "Постное", "Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков. </div>\n", 430, "грн.", ".menu__field .container").render();
+
+
+
+
+
+
+/*
+*
+                <div class="menu__item">
+                    <img src="img/tabs/elite.jpg" alt="elite">
+                    <h3 class="menu__item-subtitle">Меню “Премиум”</h3>
+                    <div class="menu__item-descr">В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>550</span> грн/день</div>
+                    </div>
+                </div>
+                <div class="menu__item">
+                    <img src="img/tabs/post.jpg" alt="post">
+                    <h3 class="menu__item-subtitle">Меню "Постное"</h3>
+                    <div class="menu__item-descr">Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков. </div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>430</span> грн/день</div>
+                    </div>
+                </div>
+            </div>
+        </div>*/
